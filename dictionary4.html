@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Idioms Dictionary</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        .dictionary-page {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .idioms-container {
+            display: flex; /* Use flex for column layout */
+            flex-direction: column; /* Organize idioms vertically */
+            align-items: left; 
+            text-align: left; 
+            padding: 10px;
+            border: 1px solid ##aaa; /* Optional border for the container */
+            border-radius: 10px;
+            max-height: 400px; /* Optional to constrain height */
+            overflow-y: auto; /* Enable vertical scrolling if necessary */
+        }
+
+        .idiom-item {
+            padding: 5px; /* Space inside idiom boxes */
+            background: ##f0f0f0;
+            border-radius: 5px;
+            cursor: pointer; /* Indicate that the idiom is clickable */
+            transition: background 0.3s; /* Transition for hover effect */
+            width: 90%; /* Adjust idiom item width as necessary */
+        }
+
+        .idiom-item:hover {
+            background: ##d0d0d0; /* Highlight effect on hover */
+        }
+
+
+        .idiom-card {
+    display: none; /* Initially hidden */
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: left; /* Align text to the left in the card */
+    position: fixed; /* Keep it centered in the viewport */
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Fixed width */
+    height: 400px; /* Fixed height */
+    overflow: hidden; /* Prevent overflow from content */
+}
+
+.idiom-card img {
+    padding-top: 20px;
+    display: block;
+    align-items: center;
+    margin: 0 auto; 
+    max-width:100px; 
+    height: 100px; 
+    max-height: 100px;
+    object-fit: cover; /* Cover the area without distorting aspect ratio */
+}
+
+#idiomText,
+#idiomDefinition,
+#idiomExample {
+    height: 50px; /* Set a fixed height for each text element, adjust as necessary */
+    overflow: visible; /* Prevent overflow */
+    white-space: normal; /* Prevent text wrapping */
+    margin: 0; /* Remove default margins */
+    padding: 5px 0; /* Add vertical padding */
+}
+
+#idiomText {
+    height: 30px; /* Adjust as necessary */
+}
+
+#idiomDefinition {
+    height: 60px; /* Adjust for potentially longer definitions */
+}
+
+#idiomExample {
+    height: 40px; /* Adjust according to expected example length */
+}
+
+.navigation-buttons {
+    position: absolute; /* Position the navigation buttons absolutely */
+    bottom: 15px; /* Position them at the bottom of the card */
+    left: 50%; /* Center vertically */
+    transform: translateX(-50%); /* Offset to align correctly */
+    display: flex; /* Use flexbox for horizontal layout */
+    gap: 10px; /* Space between buttons */
+}
+
+        .close-btn {
+        position: absolute; /* Position it absolutely within the card */
+        right: 15px; /* Align it to the right */
+        top: 15px; /* Align it to the top */
+        font-size: 20px; /* Size of the X */
+        cursor: pointer; /* Change cursor to pointer */
+        color: ##333; /* Color of the X */
+        }
+
+.close-btn:hover {
+    color: red; /* Change color on hover for better visibility */
+}
+
+        .idiom-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .overlay {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999; /* Behind the card */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dictionary-page">
+        <h1>成語單子</h1>
+        <div class="idioms-container" id="idiomsContainer"></div> <!-- Container for idioms -->
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <div class="idiom-card" id="idiomCard">
+        <span id="closeCardBtn" class="close-btn">&times;</span> <!-- Small X for closing -->
+        <img id="idiomImg" src="" alt="Idiom Image">
+        <h2 id="idiomText"></h2>
+        <p id="idiomDefinition"></p>
+        <p id="idiomExample"></p>
+        <div class="navigation-buttons">
+            <button id="prevIdiomBtn">Previous</button>
+            <button id="nextIdiomBtn">Next</button>
+        </div>
+ </div>
+
+   
+
+<button id="backToStartBtn">Home</button>
+
+    <script src="idiomsMasterList.js"></script> <!-- Link to your idioms data -->
+    <script src="dictionary4.js"></script> <!-- Link to your JavaScript file -->
+</body>
+
+</html>

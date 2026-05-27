@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Idioms Challenge - Start</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="start-page">
+
+        <h1></h1>
+        <img src="homepage2.jpg" alt="title">
+        <p></p>
+ 
+        <button id="startBtn">Play Game</button>
+        <button id="howToPlayBtn">How to Play</button>
+        <button id="dctnryBtn">Dictionary</button>
+        
+    </div>
+    <script>
+        document.getElementById('startBtn').addEventListener('click', function() {
+            window.location.href = 'pregame.html'; // Redirects to the game page
+        });
+
+        document.getElementById('howToPlayBtn').addEventListener('click', function() {
+            alert('Click and drag the characters into the correct order');
+        });
+
+        document.getElementById('dctnryBtn').addEventListener('click', function() {
+            window.location.href = 'dictionary4.html'; // Redirects to the dictionary page
+        });
+
+        
+    </script>
+</body>
+</html>

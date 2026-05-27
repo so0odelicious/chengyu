@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>成語 Drag Game</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="score">得分: 0</div>
+<div id="round"></div>
+
+
+
+<div id="imgContainer">
+  <img id="chengyuImg" src="">
+  <div id="message"></div>
+</div>
+
+
+<div class="container" id="holes">
+  <div class="hole"></div>
+  <div class="hole"></div>
+  <div class="hole"></div>
+  <div class="hole"></div>
+</div>
+
+<div class="container" id="slots">
+  <div class="slot"></div>
+  <div class="slot"></div>
+  <div class="slot"></div>
+  <div class="slot"></div>
+</div>
+
+<div id="navButtons">
+  <button id="nextBtn">下一題</button>
+</div>
+
+<div id="finalScore"></div>
+
+<div id="reviewScreen">
+  <div style="display:flex; gap:50px;">
+    <div>
+      <h3>✔ 正確</h3>
+      <div id="correctListUI"></div>
+    </div>
+    <div>
+      <h3>✘ 錯誤</h3>
+      <div id="wrongListUI"></div>
+    </div>
+  </div>
+</div>
+
+<div id="cardOverlay">
+  <div id="card">
+    <button onclick="prevCard()">←</button>
+    <div>
+      <img id="cardImg" style="width:200px;"><br>
+      <div id="cardText" style="font-size:28px;"></div>
+    </div>
+    <button onclick="nextCard()">→</button>
+  </div>
+</div>
+
+<button id="backToStartBtn">Back to Start</button>
+
+<script src="idiomsMasterList.js"></script>
+<script src="game.js"></script>
+
+
+</body>
+</html>
