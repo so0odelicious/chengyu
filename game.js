@@ -77,29 +77,49 @@ function startRound() {
   buildBlocks();
 }
 
+let dragSource = null;
+
 function buildBlocks(){
   const chars = [...currentIdiom.text]; shuffle(chars);
   chars.forEach((char,i)=>{
     const block=document.createElement("div");
     block.className="block"; block.textContent=char; block.draggable=true;
     block.id="block"+i;
-    block.addEventListener("dragstart",e=>{ if(gameFinished) return; e.dataTransfer.setData("text/plain",block.id); });
+    block.addEventListener("dragstart",e=>{
+      if(gameFinished) return;
+      e.dataTransfer.setData("text/plain",block.id);
+      dragSource = block.parentElement;
+    });
     slots[i].appendChild(block);
   });
 }
 
-holes.forEach(h=>{
-  h.addEventListener("dragover",e=>{if(gameFinished) return; e.preventDefault();});
-  h.addEventListener("drop",e=>{
-    if(gameFinished) return; e.preventDefault();
-    if(h.children.length===0){
-      const id=e.dataTransfer.getData("text/plain");
-      const block=document.getElementById(id);
-      h.appendChild(block); h.classList.add("filled");
-      checkAnswer();
+function refreshHoleFill(){
+  holes.forEach(h => h.classList.toggle("filled", h.children.length > 0));
+}
+
+function attachDropTarget(zone){
+  zone.addEventListener("dragover", e => { if(gameFinished) return; e.preventDefault(); });
+  zone.addEventListener("drop", e => {
+    if(gameFinished) return;
+    e.preventDefault();
+    const id = e.dataTransfer.getData("text/plain");
+    const block = document.getElementById(id);
+    if(!block) return;
+    const source = dragSource || block.parentElement;
+    if(zone === source) return;
+    const existing = zone.children[0];
+    if(existing){
+      source.appendChild(existing);
     }
+    zone.appendChild(block);
+    refreshHoleFill();
+    checkAnswer();
   });
-});
+}
+
+holes.forEach(attachDropTarget);
+slots.forEach(attachDropTarget);
 
 function checkAnswer(){
   let filled=true, playerOrder=[];
@@ -107,48 +127,51 @@ function checkAnswer(){
     if(h.children.length===0) filled=false;
     else playerOrder.push(h.children[0].textContent);
   });
-  if(!filled) return;
 
-  answered=true;
+  if(!filled){
+    message.textContent = "";
+    answered = false;
+    return;
+  }
+
   const isCorrect = JSON.stringify(playerOrder)===JSON.stringify(correctOrder);
-  slots.forEach(s=>[...s.children].forEach(c=>c.draggable=false));
-  holes.forEach(h=>[...h.children].forEach(c=>c.draggable=false));
 
-  if(isCorrect){ score++; correctList.push(currentIdiom); message.textContent="對"; message.style.color="green"; }
-  else { if(!wrongList.includes(currentIdiom)){
-    wrongList.push(currentIdiom);
-}; message.textContent="錯"; message.style.color="red"; }
+  if(!answered){
+    answered = true;
+    speakIdiom(currentIdiom);
+  }
 
-  speakIdiom(currentIdiom);
-  scoreDisplay.textContent=`得分: ${score}/${totalRounds}`;
+  message.textContent = isCorrect ? "對" : "錯";
+  message.style.color = isCorrect ? "green" : "red";
 }
 
 nextBtn.addEventListener("click",()=>{
   if(gameFinished) return;
 
-  if(!answered){ 
-    if(!wrongList.includes(currentIdiom)){
-      wrongList.push(currentIdiom);
+  // grade the final arrangement
+  let filled = true, playerOrder = [];
+  holes.forEach(h => {
+    if(h.children.length === 0) filled = false;
+    else playerOrder.push(h.children[0].textContent);
+  });
+  const isCorrect = filled && JSON.stringify(playerOrder) === JSON.stringify(correctOrder);
+
+  if(isCorrect){
+    score++;
+    correctList.push(currentIdiom);
+  } else {
+    wrongList.push(currentIdiom);
+    if(!filled){ message.textContent="錯（未完成）"; message.style.color="red"; }
   }
-    message.textContent="錯（未完成）"; message.style.color="red"; 
-  }
+  scoreDisplay.textContent = `得分: ${score}/${totalRounds}`;
 
-  slots.forEach(s=>[...s.children].forEach(c=>c.draggable=false));
-  holes.forEach(h=>[...h.children].forEach(c=>c.draggable=false));
+  answered = false;
 
-  answered=false;
+  remainingIdioms = remainingIdioms.filter(i => i !== currentIdiom);
+  if(remainingIdioms.length === 0){ endGame(); return; }
 
-  remainingIdioms =
-  remainingIdioms.filter(i => i !== currentIdiom);
-
-if (remainingIdioms.length === 0) {
-    endGame();
-    return;
-}
-
-round++;
-startRound();
-
+  round++;
+  startRound();
 });
 
 function endGame(){
