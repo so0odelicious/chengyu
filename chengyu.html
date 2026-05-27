@@ -2,22 +2,20 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>成語 Drag Game</title>
+<title>成語 · Drag Game</title>
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="game">
 
 <div id="score">得分: 0</div>
 <div id="round"></div>
-
-
 
 <div id="imgContainer">
   <img id="chengyuImg" src="">
   <div id="message"></div>
 </div>
 
-
+<!-- drop targets -->
 <div class="container" id="holes">
   <div class="hole"></div>
   <div class="hole"></div>
@@ -25,6 +23,7 @@
   <div class="hole"></div>
 </div>
 
+<!-- source slots -->
 <div class="container" id="slots">
   <div class="slot"></div>
   <div class="slot"></div>
@@ -33,19 +32,19 @@
 </div>
 
 <div id="navButtons">
-  <button id="nextBtn">下一題</button>
+  <button id="nextBtn">下一題 →</button>
 </div>
 
 <div id="finalScore"></div>
 
 <div id="reviewScreen">
-  <div style="display:flex; gap:50px;">
+  <div>
     <div>
-      <h3>✔ 正確</h3>
+      <h3>✓ 正確</h3>
       <div id="correctListUI"></div>
     </div>
     <div>
-      <h3>✘ 錯誤</h3>
+      <h3>✗ 錯誤</h3>
       <div id="wrongListUI"></div>
     </div>
   </div>
@@ -62,11 +61,10 @@
   </div>
 </div>
 
-<button id="backToStartBtn">Back to Start</button>
+<button id="backToStartBtn">← home</button>
 
 <script src="idiomsMasterList.js"></script>
 <script src="game.js"></script>
-
 
 </body>
 </html>

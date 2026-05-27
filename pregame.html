@@ -3,61 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinese Idioms Challenge - Start</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <title>成語遊戲 — Choose Your Fate</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="pregame-page">
-
+        <!-- legacy: hidden by CSS -->
         <h1></h1>
-        <img src="homepage2.jpg" alt="title">
         <p></p>
-        <button class="game-btn" data-level="short">
-            Play Quick Game
-        </button>
+        <img src="homepage2.jpg" alt="title" hidden>
 
-        <button class="game-btn" data-level="l1">
-            Idioms 1–25
-        </button>
+        <div class="fate-grid">
+            <button class="fate-card game-btn" data-level="short">
+                <h3 class="fate-title" lang="zh-Hant">快速</h3>
+                <div class="fate-en">Quick Game</div>
+                <div class="fate-foot">5 random idioms</div>
+            </button>
 
-        <button class="game-btn" data-level="l2">
-            Idioms 26–50
-        </button>
+            <button class="fate-card game-btn" data-level="l1">
+                <h3 class="fate-title" lang="zh-Hant">上冊</h3>
+                <div class="fate-en">Idioms 1 – 25</div>
+                <div class="fate-foot">25 idioms</div>
+            </button>
 
-    <div>  <button id="backToStartBtn">Home</button> </div>  
+            <button class="fate-card game-btn" data-level="l2">
+                <h3 class="fate-title" lang="zh-Hant">下冊</h3>
+                <div class="fate-en">Idioms 26 – 50</div>
+                <div class="fate-foot">25 idioms</div>
+            </button>
+        </div>
 
+        <div class="page-foot">
+            <button id="backToStartBtn" class="btn btn--ghost">← back to the gate</button>
+        </div>
     </div>
 
     <script>
-
         document.addEventListener("DOMContentLoaded", () => {
-        
-            // all game buttons
-            const gameButtons =
-                document.querySelectorAll(".game-btn");
-        
+            const gameButtons = document.querySelectorAll(".game-btn");
             gameButtons.forEach(button => {
-        
                 button.addEventListener("click", () => {
-        
                     const level = button.dataset.level;
-        
-                    window.location.href =
-                        `chengyu.html?level=${level}`;
+                    window.location.href = `chengyu.html?level=${level}`;
                 });
-        
             });
-        
-            // home button
+
             document.getElementById("backToStartBtn")
                 .addEventListener("click", () => {
-        
                     window.location.href = "index.html";
                 });
-        
         });
-        
-        </script>
-
+    </script>
 </body>
 </html>

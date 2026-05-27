@@ -3,24 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chinese Idioms Challenge - Start</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <title>成語遊戲 — Chinese Idioms Challenge</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="start-page">
-
+        <!-- preserved by old script; hidden by CSS -->
         <h1></h1>
-        <img src="homepage2.jpg" alt="title">
         <p></p>
- 
-        <button id="startBtn">Play Game</button>
-        <button id="howToPlayBtn">How to Play</button>
-        <button id="dctnryBtn">Dictionary</button>
-        
+
+        <div class="hero-stage">
+            <span class="talisman talisman--dice1" aria-hidden="true">🎲</span>
+            <span class="talisman talisman--dice2" aria-hidden="true">🎲</span>
+            <span class="talisman talisman--heart" aria-hidden="true">♥</span>
+            <img src="homepage2.jpg" alt="成語遊戲 seal">
+        </div>
+
+        <div class="hero-copy">
+            <h2 class="hero-title">
+                <span class="accent" data-text="成語">成語</span><br>
+                遊戲
+            </h2>
+            <p class="hero-sub">
+                Four characters. One ancient truth. Drag the brushed
+                blocks into place and unlock a thousand years of
+                Chinese wisdom — <em>慢慢來</em>, take your time.
+            </p>
+
+            <div class="hero-cta">
+                <button id="startBtn" class="btn btn--seal">
+                    開始 <span class="latin">play</span>
+                </button>
+                <button id="howToPlayBtn" class="btn">
+                    玩法 <span class="latin">how to</span>
+                </button>
+                <button id="dctnryBtn" class="btn">
+                    字典 <span class="latin">dictionary</span>
+                </button>
+            </div>
+        </div>
     </div>
+
     <script>
         document.getElementById('startBtn').addEventListener('click', function() {
-            window.location.href = 'pregame.html'; // Redirects to the game page
+            window.location.href = 'pregame.html';
         });
 
         document.getElementById('howToPlayBtn').addEventListener('click', function() {
@@ -28,10 +54,8 @@
         });
 
         document.getElementById('dctnryBtn').addEventListener('click', function() {
-            window.location.href = 'dictionary4.html'; // Redirects to the dictionary page
+            window.location.href = 'dictionary4.html';
         });
-
-        
     </script>
 </body>
 </html>
