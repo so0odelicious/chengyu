@@ -79,6 +79,10 @@ function startRound() {
 
 let dragSource = null;
 
+function firstEmptyHole(){
+  return [...holes].find(h => h.children.length === 0);
+}
+
 function buildBlocks(){
   const chars = [...currentIdiom.text]; shuffle(chars);
   chars.forEach((char,i)=>{
@@ -89,6 +93,16 @@ function buildBlocks(){
       if(gameFinished) return;
       e.dataTransfer.setData("text/plain",block.id);
       dragSource = block.parentElement;
+    });
+    block.addEventListener("click",()=>{
+      if(gameFinished) return;
+      const parent = block.parentElement;
+      if(![...slots].includes(parent)) return;
+      const target = firstEmptyHole();
+      if(!target) return;
+      target.appendChild(block);
+      refreshHoleFill();
+      checkAnswer();
     });
     slots[i].appendChild(block);
   });

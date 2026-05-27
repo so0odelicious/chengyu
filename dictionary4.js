@@ -3,10 +3,13 @@ document.getElementById('backToStartBtn').addEventListener('click', function() {
     window.location.href = 'index.html'; // Redirects back to the start page
 });
 
-document.getElementById("closeCardBtn").addEventListener("click", () => {
-    document.getElementById("idiomCard").style.display = "none"; // Hide the card
-    document.getElementById("overlay").style.display = "none"; // Hide the overlay
-});
+function closeIdiomCard() {
+    document.getElementById("idiomCard").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
+
+document.getElementById("closeCardBtn").addEventListener("click", closeIdiomCard);
+document.getElementById("overlay").addEventListener("click", closeIdiomCard);
 
 let currentIdiomIndex = -1; // This will hold the current index for navigation
 
@@ -69,10 +72,6 @@ function initDictionary() {
     // Set up the event listeners for navigation buttons
     document.getElementById("prevIdiomBtn").addEventListener("click", showPreviousIdiom);
     document.getElementById("nextIdiomBtn").addEventListener("click", showNextIdiom);
-    document.getElementById("closeCardBtn").addEventListener("click", () => {
-        document.getElementById("idiomCard").style.display = "none"; // Hide the card
-        document.getElementById("overlay").style.display = "none"; // Hide the overlay
-    });
 
 
 }
