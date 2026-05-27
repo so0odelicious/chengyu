@@ -650,10 +650,7 @@ body.game{
 }
 .hole.filled{
   background: var(--psyche);
-  background-size: 200% 200%;
-  animation: psycheShift 5s ease-in-out infinite;
   color: var(--paper);
-  text-shadow: 0 2px 0 var(--ink-soft);
 }
 .hole.filled::before{ border-style: solid; border-color: var(--ink); }
 
@@ -672,21 +669,24 @@ body.game{
   border: 2.5px solid var(--ink);
   background: var(--paper);
   color: var(--ink);
-  text-shadow: none;
+  text-shadow: none !important;
   font-family: var(--cjk);
-  font-weight: 900;
+  font-weight: 700;
   font-size: 44px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: grab;
   box-shadow: 4px 4px 0 var(--ink);
   position: relative;
+  isolation: isolate;
   transition: transform .15s ease, box-shadow .15s ease;
   user-select: none;
 }
 .block:hover{
-  transform: translate(-1px,-1px) rotate(-2deg);
+  transform: translate(-1px,-1px);
   box-shadow: 6px 6px 0 var(--ink);
 }
 .block:active{ cursor: grabbing; }
